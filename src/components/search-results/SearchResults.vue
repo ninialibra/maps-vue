@@ -11,7 +11,10 @@
                 <h5>{{ place.properties.name}}</h5>
                 <p>{{ place.properties.place_formatted }}</p>
                 <div class="text-end">
-                    <button class="btn btn-sm" :class="(place.id === activePlace ? 'btn-outline-light' : 'btn-outline-primary')">Direcciones</button>
+                    <button class="btn btn-sm" :class="(place.id === activePlace ? 'btn-outline-light' : 'btn-outline-primary')"
+                    @click.self="getRouteDirections(place)">
+                        Direcciones
+                    </button>
                 </div>
             </li>        
             

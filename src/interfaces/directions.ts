@@ -1,0 +1,59 @@
+export interface DirectionsResponse {
+    routes:    Route[];
+    waypoints: Waypoint[];
+    code:      string;
+    uuid:      string;
+}
+
+export interface Route {
+    weight_name: string;
+    weight:      number;
+    duration:    number;
+    distance:    number;
+    legs:        Leg[];
+    geometry:    Geometry;
+}
+
+export interface Geometry {
+    coordinates: Array<number[]>;
+    type:        string;
+}
+
+export interface Leg {
+    notifications: Notification[];
+    via_waypoints: any[];
+    admins:        Admin[];
+    weight:        number;
+    duration:      number;
+    sirns:         Sirns;
+    steps:         any[];
+    distance:      number;
+    summary:       string;
+}
+
+export interface Admin {
+    iso_3166_1_alpha3: string;
+    iso_3166_1:        string;
+}
+
+export interface Notification {
+    details:              Details;
+    subtype:              string;
+    type:                 string;
+    geometry_index_end:   number;
+    geometry_index_start: number;
+}
+
+export interface Details {
+    actual_value: string;
+    message:      string;
+}
+
+export interface Sirns {
+}
+
+export interface Waypoint {
+    distance: number;
+    name:     string;
+    location: number[];
+}

@@ -33,6 +33,58 @@ const mutation: MutationTree<MapState> = {
 
             state.markers.push(marker);
         }
+    },
+
+    setRoutePolyline(state, coords: number[][]){
+        const start = coords[0];
+        const end = coords[coords.length-1];
+
+        const bounds = new mapboxgl.LngLatBounds(
+            [start[0], start[1]],
+            [start[0], start[1]],
+        );
+
+        for (const coord of coords) {
+            const newCoord: [number, number] = [coord[0], coord[1]];
+            bounds.extend(newCoord);
+        }
+
+        state.map?.fitBounds(bounds, {
+            padding: 200
+        });
+
+        const sourceData:mapboxgl.SourceSpecification = {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: [
+                    {
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: coords
+                        }
+                    }
+                ]
+            }
+        };
+
+        state.map?.addSource('RouteString',sourceData);
+
+        state.map?.addLayer({
+            id: 'RouteString',
+            type: 'line',
+            source: 'RouteString',
+            layout: {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            paint:{
+                'line-color': 'black',
+                'line-width': 3
+            }
+        });
     }
 }
 
