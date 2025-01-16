@@ -70,6 +70,11 @@ const mutation: MutationTree<MapState> = {
             }
         };
 
+        if(state.map?.getLayer('RouteString')){
+            state.map?.removeLayer('RouteString');
+            state.map?.removeSource('RouteString');
+        }
+
         state.map?.addSource('RouteString',sourceData);
 
         state.map?.addLayer({
