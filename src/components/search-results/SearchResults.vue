@@ -26,8 +26,12 @@ li{
     cursor: pointer;
 }
 
+.list-group-item{
+    padding: 10px;
+}
+
 h5{
-    font-size: 15px!important;
+    font-size: 14px!important;
 }
 
 p{
